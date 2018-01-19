@@ -18,7 +18,7 @@ public class Practice10HistogramView extends View {
 
     private List<Data> mData = Arrays.asList(new Data("Froyo", 1), new Data("Gb", 10),
             new Data("ICS", 10), new Data("JB", 80), new Data("Kitkat", 120),
-            new Data("L", 90), new Data("M", 40));
+            new Data("L", 90), new Data("M", 40), new Data("test", 650));
     private int mPaddingX = 150;
     private int mPaddingY = 80;
     private int mNameHeight = 100;
@@ -34,7 +34,7 @@ public class Practice10HistogramView extends View {
     private int[] mNamePoint = new int[2];
     private int mViewWidth;
     private int mViewHeight;
-    private int mYUnitSpace;//y轴一个单位的长度
+    private float mYUnitSpace;//y轴一个单位的长度
     private int mPillarWidth;//柱子的宽度
     private List<RectF> mPillarRects = new ArrayList<>();
     private List<int[]> mLablePoints = new ArrayList<>();
@@ -94,7 +94,7 @@ public class Practice10HistogramView extends View {
 
         mNamePoint[0] = mViewWidth / 2 - nameBounds.width() / 2;
         mNamePoint[1] = mOriginalPoint[1] + mNameCoordinateOffset;
-        mYUnitSpace = (mViewHeight - mPaddingY * 2 - mNameHeight) / getMaxY();
+        mYUnitSpace = (float) (mViewHeight - mPaddingY * 2 - mNameHeight) / (float) getMaxY();
         mPillarWidth = (mViewWidth - mPaddingX * 2 - mPillarOffset * (mData.size() + 1)) / mData.size();
 
 
@@ -103,7 +103,7 @@ public class Practice10HistogramView extends View {
         Rect labelBounds = new Rect();
         for (Data datum : mData) {
             //柱形图
-            int height = datum.getNumber() * mYUnitSpace;
+            int height = (int) (datum.getNumber() * mYUnitSpace);
             start = end + mPillarOffset;
             end = start + mPillarWidth;
             mPillarRects.add(new RectF(start, mOriginalPoint[1] - height, end, mOriginalPoint[1]));
